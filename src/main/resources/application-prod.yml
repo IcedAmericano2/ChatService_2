@@ -1,0 +1,34 @@
+server:
+  port: 0
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  application:
+    name: Chat-Service
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  datasource:
+    url: ENC(arqe+nzoz4JnxH4f2AtOQwYczJJ6cGxJDQxlbubaf0zrFSSAoPO36KM/s/c6E2aeugK0WwbFvaByPRLZdhN8+xUs9Gxi6vfhwI49ugbjEqXGdBGT6vPEYw==)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ENC(XwbNi64ZLugbZJ8e2XW8TQ==)
+    password: ENC(vHU1FjVFZ9rMZvPs65NBxwl60Sr5zrt8)
+
+eureka:
+  instance:
+    hostname : localhost
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://13.125.181.139:8761/eureka
