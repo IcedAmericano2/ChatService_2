@@ -1,9 +1,12 @@
 package com.example.chatService.config;
 
+import com.example.chatService.config.jwtIntercepter.HandlerInterceptorAdapter;
+import com.example.chatService.config.jwtIntercepter.JwtInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
@@ -14,7 +17,7 @@ import org.springframework.web.socket.config.annotation.WebSocketTransportRegist
 @EnableWebSocketMessageBroker // WebSocket을 활성화하고 메시지 브로커 사용가능
 public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
 
-    private final StompHandler stompHandler;
+    private final JwtInterceptor jwtInterceptor;
 
     // STOMP 엔드포인트를 등록하는 메서드
     @Override
@@ -34,8 +37,9 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
     // 클라이언트 인바운드 채널을 구성하는 메서드
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
-        // stompHandler를 인터셉터로 등록하여 STOMP 메시지 핸들링을 수행
-        registration.interceptors(stompHandler);
+        // JwtInterceptor를 인터셉터로 등록하여 STOMP 메시지 핸들링을 수행
+        HandlerInterceptorAdapter interceptorAdapter = new HandlerInterceptorAdapter(jwtInterceptor);
+        registration.interceptors(interceptorAdapter);
     }
 
     // STOMP에서 64KB 이상의 데이터 전송을 못하는 문제 해결
