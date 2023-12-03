@@ -1,5 +1,6 @@
 package com.example.chatService.controller;
 
+import com.example.chatService.config.kafka.KafkaMessageProducer;
 import com.example.chatService.domain.Message;
 import com.example.chatService.service.ChatRoomService;
 import com.example.chatService.service.MessageService;
@@ -16,16 +17,17 @@ public class ChatController {
 
     private final ChatRoomService chatRoomService;
     private final MessageService messageService;
+    private final KafkaMessageProducer kafkaMessageProducer;
 
     @MessageMapping("/createChatRoom")
-    @SendTo("/topic/chatRoomCreated")
+    @SendTo("studioi-chatroom")
     public String createChatRoom(String userEmail) {
         chatRoomService.createChatRoom(userEmail);
         return "Chat room created for user: " + userEmail;
     }
 
     @MessageMapping("/getChatMessages")
-    @SendTo("/topic/chatMessages")
+    @SendTo("studioi-chat")
     public List<Message> getChatMessages(Integer chatRoomNo) {
         return messageService.getChatMessages(chatRoomNo);
     }
@@ -33,6 +35,7 @@ public class ChatController {
     @MessageMapping("/sendChatMessage")
     public void sendChatMessage(Message message) {
         messageService.saveChatMessage(message);
+        kafkaMessageProducer.sendMessage("studioi-chat", message);
     }
 }
 

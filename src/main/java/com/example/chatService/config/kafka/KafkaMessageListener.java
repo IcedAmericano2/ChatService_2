@@ -14,7 +14,7 @@ public class KafkaMessageListener {
     private final MessageService messageService;
     private final SimpMessagingTemplate messagingTemplate;
 
-    @KafkaListener(topics = "chat-topic", groupId = "group-id")
+    @KafkaListener(topics = {"studioi-chat", "studioi-chatroom"}, groupId = "group-id")
     public void listen(Message message) {
         // Kafka로부터 메시지 수신
         messageService.saveChatMessage(message);
