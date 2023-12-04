@@ -16,10 +16,10 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
   datasource:
-    url: ENC(arqe+nzoz4JnxH4f2AtOQwYczJJ6cGxJDQxlbubaf0zrFSSAoPO36KM/s/c6E2aeugK0WwbFvaByPRLZdhN8+xUs9Gxi6vfhwI49ugbjEqXGdBGT6vPEYw==)
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ENC(XwbNi64ZLugbZJ8e2XW8TQ==)
-    password: ENC(vHU1FjVFZ9rMZvPs65NBxwl60Sr5zrt8)
+    url: ENC(IiuEBphb1S9PmnqVHOLwRbRwEo1POJmm42W7J/XS3s7Eeh02Kt7VVi62X8v2+JZYYSNNuy2n8B+UYKLkxMBeDzQ/4t4PuorJtR2W8EKHWXdkUgZc+ppIztrCLhxqQ0ohm/oNkMlNiBy+ZC6bsQe3UE/g1SVsKHFvh+ndsQoD/+PlyljVCs6eog==)
+    username: ENC(R9ELUhikhPOj9EworsW/Nw==)
+    password: ENC(JPbOCKIfxPLVNTSoWB7TYrmLrB0Pup/c)
 
 eureka:
   instance:
